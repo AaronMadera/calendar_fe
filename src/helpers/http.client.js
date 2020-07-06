@@ -27,7 +27,7 @@ class HttpClient{
 
     async delete(url, headers = {}) {
         headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-        return this.client.get(url, { headers });
+        return this.client.delete(url, { headers });
     }
 }
 
