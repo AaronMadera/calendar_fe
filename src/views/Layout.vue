@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-sidebar id="sidebar-menu" title="Menu" :visible="true" bg-variant="dark" text-variant="info" shadow>
+        <b-sidebar id="sidebar-menu" title="Menu" bg-variant="dark" text-variant="info" shadow>
             <b-nav vertical class="text-center">
                  <b-nav-item>
                     <router-link :to="{name:'events'}" class="mx-auto text-warning">
@@ -15,7 +15,7 @@
                     </router-link>
                 </b-nav-item>
                 <b-nav-item class="mx-auto mt-5 text-warning">
-                    <b-button variant="outline-warning" @click="logout">
+                    <b-button variant="outline-warning" title="I'm gonna miss you ;(" @click="logout">
                         <faw-icon icon="sign-out-alt"/> Log out
                     </b-button>
                 </b-nav-item>
@@ -28,7 +28,7 @@
                 <span class="my-auto mr-3 text-light" :title="'welcome, '+user.name + '!!'" style="cursor: default">
                     <faw-icon icon="user"/> {{user.email}}
                 </span>
-                <b-button variant="outline-dark" @click="logout">
+                <b-button variant="outline-dark"  title="I'm gonna miss you ;(" @click="logout">
                     <faw-icon icon="sign-out-alt"/> Log out
                 </b-button>
             </b-navbar-nav>
