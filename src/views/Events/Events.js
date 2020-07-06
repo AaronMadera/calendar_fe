@@ -91,7 +91,14 @@ export default {
             }
             this.Load();
         },
-        async ChangeStatus(item) {console.log(item) },
+        async ChangeStatus(item) {
+            try {
+                await this.service.ChangeStatus(item._id, { completed: !item.completed });
+            } catch (e) {
+                console.log(e);
+            }
+            this.Load();
+        },
         async Edit(item) {console.log(item) },
         async Delete(item) { console.log(item)},
     }

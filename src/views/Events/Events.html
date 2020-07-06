@@ -25,21 +25,25 @@
                 <strong class="ml-3"> ... Loading</strong>
             </div>
         </template>
+        <template v-slot:cell(completed)="{item}">
+            <faw-icon icon="check-circle" v-if="item.completed"  size="lg" class="text-success"></faw-icon>
+            <faw-icon icon="times-circle" v-else  size="lg" class="text-danger"></faw-icon>
+        </template>
         <template v-slot:cell(actions)="{item}">
             <a href="#"
                title="Change status"
                @click="ChangeStatus(item)">
-                <faw-icon icon="exchange-alt" />
+                <faw-icon icon="exchange-alt" size="lg" class="mr-3 text-success" />
             </a>
             <a href="#"
                title="Edit"
                @click="Edit(item)">
-                <faw-icon icon="edit" />
+                <faw-icon icon="edit" size="lg" class="mr-3" />
             </a>
             <a href="#"
                title="Delete"
                @click="Delete(item)">
-                <faw-icon icon="trash-alt" />
+                <faw-icon icon="trash-alt" size="lg" class="mr-3 text-danger" />
             </a>
         </template>
     </b-table>

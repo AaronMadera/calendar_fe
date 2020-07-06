@@ -11,6 +11,8 @@ import {
     faExchangeAlt,
     faEdit,
     faTrashAlt,
+    faCheckCircle,
+    faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -23,5 +25,7 @@ library.add(
     faExchangeAlt,
     faEdit,
     faTrashAlt,
+    faCheckCircle,
+    faTimesCircle,
 );
 Vue.component('faw-icon', FontAwesomeIcon);

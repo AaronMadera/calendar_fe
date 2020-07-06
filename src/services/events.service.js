@@ -22,8 +22,15 @@ class EventsService extends BaseService {
             const res = await this.http.post(`${this.path}/create`, data);
             return res.data;
         } catch (e) {
-            console.log(e);
-            
+            return { error: true, e };
+        }
+    }
+
+    async ChangeStatus(_id,data) {
+        try {
+            const res = await this.http.patch(`${this.path}/status/${_id}`, data);
+            return res.data;
+        } catch (e) {
             return { error: true, e };
         }
     }
