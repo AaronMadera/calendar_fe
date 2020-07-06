@@ -55,7 +55,7 @@
                     const { error, data } = await this.service.LogIn({ email: this.email, password: this.pass });
                     if (!error && data) {
                         this.setUser(data);
-                        this.$router.go();
+                        this.$router.push({name:'events'});
                     } else throw new Error('Error while trying to log in');
                 } catch (e) {
                     console.log(e);

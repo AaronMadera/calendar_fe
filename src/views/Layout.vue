@@ -15,7 +15,7 @@
                     </router-link>
                 </b-nav-item>
                 <b-nav-item class="mx-auto mt-5 text-warning">
-                    <b-button variant="outline-warning" title="I'm gonna miss you ;(" @click="logout">
+                    <b-button variant="outline-warning" title="I'm gonna miss you ;(" @click="logoutUser">
                         <faw-icon icon="sign-out-alt"/> Log out
                     </b-button>
                 </b-nav-item>
@@ -28,7 +28,7 @@
                 <span class="my-auto mr-3 text-light" :title="'welcome, '+user.name + '!!'" style="cursor: default">
                     <faw-icon icon="user"/> {{user.email}}
                 </span>
-                <b-button variant="outline-dark"  title="I'm gonna miss you ;(" @click="logout">
+                <b-button variant="outline-dark"  title="I'm gonna miss you ;(" @click="logoutUser">
                     <faw-icon icon="sign-out-alt"/> Log out
                 </b-button>
             </b-navbar-nav>
@@ -58,6 +58,10 @@
         methods: {
             ...mapGetters([ 'getUser' ]),
             ...mapActions([ 'logout' ]),
+            logoutUser() {
+                this.logout();
+                this.$router.push({ name: 'login' });
+            }
         }
 
     }
