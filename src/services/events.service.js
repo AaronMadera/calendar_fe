@@ -34,6 +34,15 @@ class EventsService extends BaseService {
             return { error: true, e };
         }
     }
+    
+        async Update(_id,data) {
+            try {
+                const res = await this.http.put(`${this.path}/update/${_id}`,data);
+                return res.data;
+            } catch (e) {
+                return { error: true, e };
+            }
+        }
 
     async Remove(_id) {
         try {
