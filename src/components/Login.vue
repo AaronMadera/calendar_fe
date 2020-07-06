@@ -35,6 +35,9 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
+    import UserService from '../services/users.service';
+
     export default {
         name: 'Login',
         data() {
@@ -42,11 +45,21 @@
                 email: '',
                 pass: '',
                 bgImgLg: 'https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?ixlib=rb-1.2.1&auto=format&fit=crop&h=700&q=80',
+                service: new UserService()
             };
         },
         methods: {
-            sendCreds() {
-                alert(`email: ${this.email}, pass: ${this.pass}`);
+            ...mapActions([ 'setUser' ]),
+            async sendCreds() {
+                try {
+                    const { error, data } = await this.service.LogIn({ email: this.email, password: this.pass });
+                    if (!error && data) {
+                        this.setUser(data);
+                        this.$router.go();
+                    } else throw new Error('Error while trying to log in');
+                } catch (e) {
+                    console.log(e);
+                }
             }
         }
     }
