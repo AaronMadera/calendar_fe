@@ -100,6 +100,13 @@ export default {
             this.Load();
         },
         async Edit(item) {console.log(item) },
-        async Delete(item) { console.log(item)},
+        async Delete(item) {
+            try {
+                await this.service.Remove(item._id);
+            } catch (e) {
+                console.log(e);
+            }
+            this.Load();
+        },
     }
 };

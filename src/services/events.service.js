@@ -34,6 +34,15 @@ class EventsService extends BaseService {
             return { error: true, e };
         }
     }
+
+    async Remove(_id) {
+        try {
+            const res = await this.http.delete(`${this.path}/remove/${_id}`);
+            return res.data;
+        } catch (e) {
+            return { error: true, e };
+        }
+    }
 }
 
 export default EventsService;
