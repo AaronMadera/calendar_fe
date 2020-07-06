@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Log in </router-link>
-      <router-link :to="{name:'users'}">Users<faw-icon icon="user"></faw-icon> </router-link>
-      <router-link :to="{name:'events'}">Events<faw-icon icon="user"></faw-icon> </router-link>
-    </div>
     <router-view/>
   </div>
 </template>
