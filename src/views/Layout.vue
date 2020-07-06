@@ -14,6 +14,11 @@
                         <span class="ml-3 h5"> Users</span>
                     </router-link>
                 </b-nav-item>
+                <b-nav-item class="mx-auto mt-5 text-warning">
+                    <b-button variant="outline-warning" @click="logout">
+                        <faw-icon icon="sign-out-alt"/> Log out
+                    </b-button>
+                </b-nav-item>
             </b-nav>
         </b-sidebar>
 

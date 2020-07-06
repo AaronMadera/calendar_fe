@@ -7,6 +7,10 @@ import {
     faUsers,
     faCalendar,
     faSignOutAlt,
+    faPlus,
+    faExchangeAlt,
+    faEdit,
+    faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -15,5 +19,9 @@ library.add(
     faUsers,
     faCalendar,
     faSignOutAlt,
+    faPlus,
+    faExchangeAlt,
+    faEdit,
+    faTrashAlt,
 );
 Vue.component('faw-icon', FontAwesomeIcon);

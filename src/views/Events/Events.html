@@ -1,4 +1,88 @@
 <section id="Events">
     <h1>Events</h1>
-    <router-link :to="{name: 'home'}">Go Home</router-link>
+    <br>
+
+    <div class="text-right mr-5">
+        <b-button @click="showCreateModal">
+            <faw-icon icon="plus" />
+        </b-button>
+    </div>
+    <br>
+    <b-table striped
+             hover
+             :busy="isBusy"
+             show-empty
+              :fields="tableFields" 
+             :items="events">
+        <template v-slot:empty>
+            <h5 class="text-light text-center mt-5 h3">
+                <em>You don't have events yet. Create some!</em>
+            </h5>
+        </template>
+        <template v-slot:table-busy>
+            <div class="text-center text-light h3 my-2">
+                <b-spinner class="align-middle"></b-spinner>
+                <strong class="ml-3"> ... Loading</strong>
+            </div>
+        </template>
+        <template v-slot:cell(actions)="{item}">
+            <a href="#"
+               title="Change status"
+               @click="ChangeStatus(item)">
+                <faw-icon icon="exchange-alt" />
+            </a>
+            <a href="#"
+               title="Edit"
+               @click="Edit(item)">
+                <faw-icon icon="edit" />
+            </a>
+            <a href="#"
+               title="Delete"
+               @click="Delete(item)">
+                <faw-icon icon="trash-alt" />
+            </a>
+        </template>
+    </b-table>
+
+    <b-modal ref="formModal" hide-footer title="Events Creation">
+        <b-button variant="info" class="mr-auto" @click="addNewEvent"> Add Event</b-button>
+        <b-button v-if="events2Send.length>1" class="ml-3" variant="danger" @click="popEvent"> Delete Event</b-button>
+
+        <form class="p-3" @submit.stop.prevent="submitEvents">
+            <p v-if="notCreatedError" class="">
+                 The next Events could not be created, because overlap other events. Please, change dates and times.
+                </p>
+            <div v-for="(event,index) in events2Send">
+                <p class="text-center">Event {{index+1}}</p>
+                <b-form-group :label-for="'title-input'+index" class="mt-3"
+                        invalid-feedback="this field is required" label="Title">
+                    <b-form-input :id="'title-input'+index" v-model="event.title" required />
+                </b-form-group>
+                <b-form-group :label-for="'desc-input'+index" class="mt-3"
+                        invalid-feedback="this field is required" label="Description">
+                    <b-form-input :id="'desc-input'+index" v-model="event.description" required />
+                </b-form-group>
+                <div>
+                    <label :for="'datepicker'+index">Date of start</label>
+                    <b-form-datepicker :id="'datepicker'+index"  placeholder="Choose a date" local="en" v-model="event.startsAt.date" required></b-form-datepicker>
+                </div>
+                <div>
+                    <b-form-timepicker now-button v-model="event.startsAt.time" locale="en" required></b-form-timepicker>
+                </div>
+                <div>
+                    <label :for="'datepicker-end'+index" class="mt-3">Date of End</label>
+                    <b-form-datepicker :id="'datepicker-end'+index" placeholder="Choose a date" local="en" v-model="event.endsAt.date" required></b-form-datepicker>
+                </div>
+                <div>
+                    <b-form-timepicker v-model="event.endsAt.time" now-button locale="en" required></b-form-timepicker>
+                </div>
+                <hr>
+            </div>
+            <div class="mt-3 float-right">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a class="btn btn-danger ml-2" @click="handlerHideModal">Cancel</a>
+            </div>
+        </form>
+    </b-modal>
+
 </section>
