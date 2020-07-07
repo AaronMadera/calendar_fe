@@ -53,11 +53,12 @@ export default {
             this.$refs[ "formModal" ].hide();
             this.notCreatedError = false;
             this.user2Edit = null;
+            this.newUser = this.emptyUser();
             this.Load();
         },
         async submitUser() {
             try {
-                const { error } = this.user2Edit ? {}/*  await this.service.Update(this.user2Edit,this.newUser) */ :
+                const { error } = this.user2Edit ? await this.service.UpdateUser({ userId: this.newUser._id, isAdmin: this.newUser.isAdmin, name: this.newUser.name })  :
                     await this.service.CreateUser(this.newUser);
                 if (error) {
                     this.notCreatedError = true;
@@ -69,31 +70,20 @@ export default {
         },
         async ChangeAdminPerm(item) {
             try {
-                console.log(item);
-                // await this.service.ChangeStatus(item._id, { completed: !item.completed });
+                await this.service.UpdateUser({
+                    userId: item._id,
+                    isAdmin: !item.isAdmin,
+                    name:item.name
+                });
             } catch (e) {
                 console.log(e);
             }
             this.Load();
         },
         async Edit(item) {
-            console.log(item);
-
-            // this.resetEvents2Send();
-            // this.event2Edit = item._id;
-
-            // const startDate = new Date(item.startsAt);
-            // const endDate = new Date(item.endsAt);
-            // item.startsAt = {
-            //     date: `${startDate.getFullYear()}-${startDate.getMonth() < 9 ? '0' + (startDate.getMonth() + 1) : (startDate.getMonth() + 1)}-${startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()}`,
-            //     time: `${startDate.getHours() < 10 ? '0' + startDate.getHours() : startDate.getHours()}:${startDate.getMinutes() < 10 ? '0' + startDate.getMinutes() : startDate.getMinutes()}:${startDate.getSeconds() < 10 ? '0' + startDate.getSeconds() : startDate.getSeconds()}`
-            // }
-            // item.endsAt = {
-            //     date: `${endDate.getFullYear()}-${endDate.getMonth() < 9 ? '0' + (endDate.getMonth() + 1) : (endDate.getMonth() + 1)}-${endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate()}`,
-            //     time: `${endDate.getHours() < 10 ? '0' + endDate.getHours() : endDate.getHours()}:${endDate.getMinutes() < 10 ? '0' + endDate.getMinutes() : endDate.getMinutes()}:${endDate.getSeconds() < 10 ? '0' + endDate.getSeconds() : endDate.getSeconds()}`
-            // }
-            // Object.assign(this.events2Send[ 0 ], item);
-            // this.showCreateModal();
+            this.user2Edit = item._id;
+            Object.assign(this.newUser, item);
+            this.showCreateModal();
         },
 
         async Delete(item) {

@@ -32,6 +32,15 @@ class UsersService extends BaseService{
             return { error: true, e };
         }
     }
+
+    async UpdateUser(data) {
+        try {
+            const res = await this.http.put(`${this.path}/update`,data);
+            return res.data;
+        } catch (e) {
+            return { error: true, e };
+        }
+    }
 }
 
 export default UsersService;
