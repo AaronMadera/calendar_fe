@@ -73,6 +73,10 @@
                 debounce="500" type="password" required />
             </b-form-group>
            
+            <b-form-checkbox v-model="newUser.isAdmin" :state="newUser.isAdmin" switch>
+                Assign admin permission
+            </b-form-checkbox>
+
             <div class="mt-3 float-right">
                 <button type="submit" class="btn btn-primary">{{this.user2Edit? 'Update' : 'Create'}}</button>
                 <a class="btn btn-danger ml-2" @click="handlerHideModal">Cancel</a>

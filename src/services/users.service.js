@@ -23,6 +23,15 @@ class UsersService extends BaseService{
             return { error: true, e };
         }
     }
+
+    async CreateUser(data) {
+        try {
+            const res = await this.http.post(`${this.path}/create`,data);
+            return res.data;
+        } catch (e) {
+            return { error: true, e };
+        }
+    }
 }
 
 export default UsersService;

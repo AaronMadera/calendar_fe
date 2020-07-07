@@ -57,27 +57,12 @@ export default {
         },
         async submitUser() {
             try {
-                // this.events2Send.forEach(event => {
-                //     event.startsAt = new Date(`${event.startsAt.date} ${event.startsAt.time}`).getTime();
-                //     event.endsAt = new Date(`${event.endsAt.date} ${event.endsAt.time}`).getTime();
-                // });
-                // const { error, data } = this.event2Edit ? await this.service.Update(this.event2Edit, this.events2Send[ 0 ]) :
-                //     await this.service.CreateEvents({ events: this.events2Send });
-                // if (data && data.notCreated && data.notCreated.length) {
-                //     this.events2Send = [];
-                //     this.notCreatedError = true;
-                //     data.notCreated.forEach(nc => {
-                //         nc.content.startsAt = { date: '', time: '' };
-                //         nc.content.endsAt = { date: '', time: '' };
-                //         this.events2Send.push(nc.content);
-                //     });
-                // } else if (error && this.event2Edit) {
-                //     this.events2Send[ 0 ].startsAt = { date: '', time: '' };
-                //     this.events2Send[ 0 ].endsAt = { date: '', time: '' };
-                //     this.notCreatedError = true;
-                // }
-                // else if (error) throw new Error(error);
-                // else this.handlerHideModal();
+                const { error } = this.user2Edit ? {}/*  await this.service.Update(this.user2Edit,this.newUser) */ :
+                    await this.service.CreateUser(this.newUser);
+                if (error) {
+                    this.notCreatedError = true;
+                    throw new Error(error);
+                } else this.handlerHideModal();
             } catch (e) {
                 console.log(e);
             }
