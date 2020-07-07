@@ -88,12 +88,11 @@ export default {
 
         async Delete(item) {
             try {
-                console.log(item);
-                // await this.service.Remove(item._id);
+                await this.service.Remove(item._id);
             } catch (e) {
                 console.log(e);
             }
-            // this.Load();
+            this.Load();
         },
     }
 };
