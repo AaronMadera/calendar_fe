@@ -13,6 +13,7 @@ import {
     faTrashAlt,
     faCheckCircle,
     faTimesCircle,
+    faUserEdit,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -27,5 +28,6 @@ library.add(
     faTrashAlt,
     faCheckCircle,
     faTimesCircle,
+    faUserEdit,
 );
 Vue.component('faw-icon', FontAwesomeIcon);
