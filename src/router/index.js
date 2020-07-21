@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import store from '../store/index';
+// import store from '../store/index';
 
 Vue.use(VueRouter)
 
@@ -18,14 +18,15 @@ Vue.use(VueRouter)
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "home" */ '../views/Layout.vue'),
     children: [
-      {
-        path: '/events',
-        name: 'events',
-        component: () => import(/* webpackChunkName: "events" */ '../views/Events/index')
-      },
+      // {
+      //   path: '/events',
+      //   name: 'events',
+      //   component: () => import(/* webpackChunkName: "events" */ '../views/Events/index')
+      // },
       {
         path: '/users',
         name: 'users',
+        meta: { isAdmin: true },
         component: () => import(/* webpackChunkName: "users" */ '../views/Users/index')
       }
     ]
@@ -38,17 +39,17 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  const {expires,isLogged} = store.state;
-  const now = Date.now();
+// router.beforeEach((to, from, next) => {
+//   const {expires,isLogged} = store.state;
+//   const now = Date.now();
 
-  if (isLogged && store.getters.getUser && now < expires) { 
-    const { isAdmin } = store.getters.getUser;
-    if (to.name === 'login')return next({ name: 'home' });
-    if (to.meta && to.meta.isAdmin && !isAdmin) return next({ name: 'home' });
-    return next();
-  } else if (to.name === 'login') return next();
-  else return next({name:'login'});
-});
+//   if (isLogged && store.getters.getUser && now < expires) { 
+//     const { permissions : { isAdmin } } = store.getters.getUser;
+//     if (to.name === 'login')return next({ name: 'home' });
+//     if (to.meta && to.meta.isAdmin && !isAdmin) return next({ name: 'home' });
+//     return next();
+//   } else if (to.name === 'login') return next();
+//   else return next({name:'login'});
+// });
 
 export default router
